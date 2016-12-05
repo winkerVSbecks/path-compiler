@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Path Compiler</title>
+  <link rel="stylesheet" href="https://unpkg.com/tachyons@4.5.5/css/tachyons.min.css"/>
+</head>
+<body class="code">
+
+  <header class="mw8 center mt6 ph2">
+    <h1 class="f4 dark-gray">Canvas Path Compiler</h1>
+  </header>
+
+  <div class="mw8 center flex mt5">
+    <div id="js-canvas" class="mw6 center w-50 ph2"></div>
+
+    <div class="w-50 ma0 flex flex-column ph2">
+      <textarea id="js-code"
+        class="mb2 flex-auto ba b--light-green bw1 navy ba b--purple pa2 outline-0"
+        style="border-top-width: 1.5rem;">
+      </textarea>
+      <button id="js-compile"
+        class="b ba b--purple bw1 purple bg-white button-reset db dim f6 link pa3 tracked-mega ttu pointer">
+        Compile
+      </button>
+    </div>
+  </div>
+
+  <div class="mw8 center mt3 ph2">
+    <div id="js-error"
+      class="h4 bg-washed-red red pa2 flex items-center justify-center"></div>
+  </div>
+
+  <script src="bundle.js"></script>
+</body>
+</html>
