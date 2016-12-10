@@ -31,6 +31,121 @@
       class="h4 pa2 bg-light-gray flex items-center justify-center"></div>
   </div>
 
+  <div class="mw8 center mv6 ph2 code dark-gray lh-copy">
+    <h2 class="f4">API</h2>
+
+    <table class="collapse w-100 tl">
+      <thead>
+        <tr class="bb b--light-gray bw2">
+          <th class="pv3 pr3">Command</th>
+          <th class="pv3 ph3">Arguments</th>
+          <th class="pv3 ph3">Description</th>
+          <th class="pv3 ph3">Defaults</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bb b--light-gray">
+          <td class="pv3 pr3">canvas</td>
+          <td class="pv3 ph3 nowrap">
+            width<code class="silver">: number</code>, height<code class="silver">: number</code>
+          </td>
+          <td class="pv3 ph3">sets the artboard dimensions</td>
+          <td class="pv3 ph3">400x400</td>
+        </tr>
+        <tr class="bb b--light-gray">
+          <td class="pv3 pr3">size</td>
+          <td class="pv3 ph3 nowrap">
+            stroke-width<code class="silver">: number</code>
+          </td>
+          <td class="pv3 ph3">sets the stroke size</td>
+          <td class="pv3 ph3">1</td>
+        </tr>
+        <tr class="bb b--light-gray">
+          <td class="pv3 pr3">stroke</td>
+          <td class="pv3 ph3 nowrap">
+            stroke-color<code class="silver">: color</code>
+          </td>
+          <td class="pv3 ph3">sets the stroke colour</td>
+          <td class="pv3 ph3">#333</td>
+        </tr>
+        <tr class="bb b--light-gray">
+          <td class="pv3 pr3">fill</td>
+          <td class="pv3 ph3 nowrap">
+            fill-color<code class="silver">: color</code>
+          </td>
+          <td class="pv3 ph3">sets the fill colour</td>
+          <td class="pv3 ph3">none</td>
+        </tr>
+        <tr class="bb b--light-gray">
+          <td class="pv3 pr3">move</td>
+          <td class="pv3 ph3 nowrap">
+            stroke-width<code class="silver">: number</code>
+          </td>
+          <td class="pv3 ph3">moves the pen to a new position</td>
+          <td class="pv3 ph3"></td>
+        </tr>
+        <tr class="bb b--light-gray">
+          <td class="pv3 pr3">line</td>
+          <td class="pv3 ph3 nowrap">
+            x<code class="silver">: number</code>,
+            y<code class="silver">: number</code>
+          </td>
+          <td class="pv3 ph3">draws a line from the current position of the pen to the specified position</td>
+          <td class="pv3 ph3"></td>
+        </tr>
+        <tr class="bb b--light-gray">
+          <td class="pv3 pr3">horizontal</td>
+          <td class="pv3 ph3 nowrap">
+            x<code class="silver">: number</code>
+          </td>
+          <td class="pv3 ph3">draws a horizontal line from the current position of the pen to the specified x position</td>
+          <td class="pv3 ph3"></td>
+        </tr>
+        <tr class="bb b--light-gray">
+          <td class="pv3 pr3">vertical</td>
+          <td class="pv3 ph3 nowrap">
+            y<code class="silver">: number</code>
+          </td>
+          <td class="pv3 ph3">draws a vertical line from the current position of the pen to the specified x position</td>
+          <td class="pv3 ph3"></td>
+        </tr>
+        <tr class="bb b--light-gray">
+          <td class="pv3 pr3">curve</td>
+          <td class="pv3 ph3 nowrap">
+            stroke-width<code class="silver">: number</code>
+          </td>
+          <td class="pv3 ph3">sets the stroke size</td>
+          <td class="pv3 ph3"></td>
+        </tr>
+        <tr class="bb b--light-gray">
+          <td class="pv3 pr3">reflect</td>
+          <td class="pv3 ph3 nowrap">
+            stroke-width<code class="silver">: number</code>
+          </td>
+          <td class="pv3 ph3">sets the stroke size</td>
+          <td class="pv3 ph3"></td>
+        </tr>
+        <tr class="bb b--light-gray">
+          <td class="pv3 pr3">close</td>
+          <td class="pv3 ph3 nowrap">
+          </td>
+          <td class="pv3 ph3">draws a line from the current position back to the starting position of the path</td>
+          <td class="pv3 ph3"></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 class="f4 mt5">Data Types</h2>
+    <dl class="lh-title mv3">
+      <dt class="b">number</dt>
+      <dd class="dib ml0 gray">JavaScript number</dd>
+    </dl>
+    <dl class="lh-title mv3">
+      <dt class="b">color</dt>
+      <dd class="dib ml0 gray">Hex colour codes, none and transparent</dd>
+    </dl>
+  </div>
+
   <script src="bundle.js"></script>
 </body>
 </html>

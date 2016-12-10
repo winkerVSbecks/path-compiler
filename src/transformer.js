@@ -3,7 +3,7 @@ import { fromJS } from 'immutable';
 import { OPERATIONS } from './constants';
 
 const operations = {
-  [OPERATIONS.canvas]:      makeSvg,
+  [OPERATIONS.canvas]:      setViewBox,
   [OPERATIONS.stroke]:      setAttr('stroke'),
   [OPERATIONS.size]:        setAttr('stroke-width'),
   [OPERATIONS.fill]:        setAttr('fill'),
@@ -22,12 +22,12 @@ function isOperator(type) {
   );
 }
 
-function makeSvg(svg, w, h) {
-  return svg.merge({
+function makeSvg(w, h) {
+  return ({
     type: 'svg',
     attrs: [{
       type: 'viewBox',
-      value: `0 0 ${w} ${h}`,
+      value: `0 0 400 400`,
     }, {
       type: 'width',
       value: '100%',
@@ -58,6 +58,17 @@ function makeSvg(svg, w, h) {
       }],
       d: [],
     },
+  });
+}
+
+function setViewBox(svg, w, h) {
+  const idx = svg.get('attrs')
+    .findIndex(attr => {
+      return attr.get('type') === 'viewBox';
+    });
+
+  return svg.mergeIn(['attrs', idx], {
+    value: `0 0 ${w} ${h}`,
   });
 }
 
@@ -113,6 +124,9 @@ function svgReducer(svgAst, operation) {
  */
 export const transformer = R.compose(
   x => x.toJS(),
-  R.reduce(svgReducer, fromJS({})),
+  R.reduce(
+    svgReducer,
+    fromJS( makeSvg() )
+  ),
   R.prop('body'),
 );
