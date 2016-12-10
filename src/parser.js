@@ -36,7 +36,7 @@ function pluckTokens(count, tokens) {
   return tokens => tokens.slice(0, count);
 }
 
-function withValidTokens(type, count) {
+function checkArgCount(type, count) {
   const argType = getArgFor(type);
   return R.ifElse(
     R.all(
@@ -59,23 +59,45 @@ function getArgFor(type) {
   )([OPERATIONS.stroke, OPERATIONS.fill]);
 }
 
-function operatorWithArgCount(type, count) {
+function argCountValidation(type, count) {
   return R.compose(
     operator(R.__, type),
-    withValidTokens(type, count),
+    checkArgCount(type, count),
     pluckTokens(count),
   );
 }
 
+function lastOpValidation(type) {
+  return R.ifElse(
+    R.isEmpty,
+    R.identity,
+    () =>  {
+      throwError(
+        `<span class="mr1 b">Syntax Error:</span> ${ type } must be the last command`
+      );
+    },
+  );
+}
+
+function opWithValidation(type, { args, prev, last }) {
+  return R.compose(
+    argCountValidation(type, args),
+    R.when(
+      R.always(R.equals(last, true)), lastOpValidation(type),
+    ),
+  );
+}
+
 const operations = {
-  [OPERATIONS.canvas]:     operatorWithArgCount(OPERATIONS.canvas, 2),
-  [OPERATIONS.size]:       operatorWithArgCount(OPERATIONS.size, 1),
-  [OPERATIONS.stroke]:     operatorWithArgCount(OPERATIONS.stroke, 1),
-  [OPERATIONS.fill]:       operatorWithArgCount(OPERATIONS.fill, 1),
-  [OPERATIONS.line]:       operatorWithArgCount(OPERATIONS.line, 2),
-  [OPERATIONS.move]:       operatorWithArgCount(OPERATIONS.move, 2),
-  [OPERATIONS.horizontal]: operatorWithArgCount(OPERATIONS.horizontal, 1),
-  [OPERATIONS.vertical]:   operatorWithArgCount(OPERATIONS.vertical, 1),
-  [OPERATIONS.curve]:      operatorWithArgCount(OPERATIONS.curve, 6),
-  [OPERATIONS.close]:      operatorWithArgCount(OPERATIONS.close, 0),
+  [OPERATIONS.canvas]:     opWithValidation(OPERATIONS.canvas, { args: 2 }),
+  [OPERATIONS.size]:       opWithValidation(OPERATIONS.size, { args: 1 }),
+  [OPERATIONS.stroke]:     opWithValidation(OPERATIONS.stroke, { args: 1 }),
+  [OPERATIONS.fill]:       opWithValidation(OPERATIONS.fill, { args: 1 }),
+  [OPERATIONS.line]:       opWithValidation(OPERATIONS.line, { args: 2 }),
+  [OPERATIONS.move]:       opWithValidation(OPERATIONS.move, { args: 2 }),
+  [OPERATIONS.horizontal]: opWithValidation(OPERATIONS.horizontal, { args: 1 }),
+  [OPERATIONS.vertical]:   opWithValidation(OPERATIONS.vertical, { args: 1 }),
+  [OPERATIONS.curve]:      opWithValidation(OPERATIONS.curve, { args: 6 }),
+  [OPERATIONS.close]:      opWithValidation(OPERATIONS.close,
+                                            { args: 0, last: true }),
 };

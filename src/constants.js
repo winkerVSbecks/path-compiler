@@ -14,7 +14,9 @@ export const OPERATIONS = {
   move: 'MOVE',
   horizontal: 'HORIZONTAL',
   vertical: 'VERTICAL',
-  curve: 'CURVE',
+  cubic: 'CUBIC',
+  cubic: 'CUBIC',
+  quad: 'QUAD',
   reflect: 'REFLECT',
   close: 'CLOSE',
 };

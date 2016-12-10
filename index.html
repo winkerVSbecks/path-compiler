@@ -2,13 +2,13 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Path Compiler</title>
+  <title>SVG Path Compiler</title>
   <link rel="stylesheet" href="https://unpkg.com/tachyons@4.5.5/css/tachyons.min.css"/>
 </head>
 <body class="code">
 
   <header class="mw8 center mt6 ph2">
-    <h1 class="f4 dark-gray">Canvas Path Compiler</h1>
+    <h1 class="f4 dark-gray">SVG Path Compiler</h1>
   </header>
 
   <div class="mw8 center flex mt5">
@@ -33,6 +33,10 @@
 
   <div class="mw8 center mv6 ph2 code dark-gray lh-copy">
     <h2 class="f4">API</h2>
+
+    <p>
+      The origin (0, 0) is at the top left corner of the canvas. All positions are relative to the origin.
+    </p>
 
     <table class="collapse w-100 tl">
       <thead>
@@ -138,7 +142,7 @@
     <h2 class="f4 mt5">Data Types</h2>
     <dl class="lh-title mv3">
       <dt class="b">number</dt>
-      <dd class="dib ml0 gray">JavaScript number</dd>
+      <dd class="dib ml0 gray">Integer or floating-point number</dd>
     </dl>
     <dl class="lh-title mv3">
       <dt class="b">color</dt>
