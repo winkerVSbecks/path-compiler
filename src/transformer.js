@@ -12,7 +12,9 @@ const operations = {
   [OPERATIONS.horizontal]:  makeHorizontal,
   [OPERATIONS.vertical]:    makeVertical,
   [OPERATIONS.cubic]:       makeCubic,
+  [OPERATIONS.reflect]:     makeReflect,
   [OPERATIONS.quad]:        makeQuad,
+  [OPERATIONS.chain]:       makeChain,
   [OPERATIONS.close]:       makeClose,
 };
 
@@ -112,6 +114,14 @@ function makeQuad(svg, x1, y1, x, y) {
 
 function makeClose(svg) {
   return addToPath(svg, `Z`);
+}
+
+function makeReflect(svg) {
+  return svg;
+}
+
+function makeChain(svg) {
+  return svg;
 }
 
 function addToPath(svg, command) {

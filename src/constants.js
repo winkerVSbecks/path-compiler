@@ -15,8 +15,8 @@ export const OPERATIONS = {
   horizontal: 'HORIZONTAL',
   vertical: 'VERTICAL',
   cubic: 'CUBIC',
-  cubic: 'CUBIC',
-  quad: 'QUAD',
   reflect: 'REFLECT',
+  quad: 'QUAD',
+  chain: 'CHAIN',
   close: 'CLOSE',
 };

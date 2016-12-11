@@ -15,7 +15,50 @@ export function parser(tokens) {
     }
   }
 
+  checkOrder(body);
+
   return { type: 'Canvas', body };
+}
+
+function checkReflectOrder(t) {
+  return R.unless(
+    R.anyPass([
+      R.equals(OPERATIONS.cubic),
+      R.equals(OPERATIONS.reflect),
+    ]),
+    throwError(
+      `<span class="mr1 b">Syntax Error:</span> ${ OPERATIONS.reflect } command must follow ${ OPERATIONS.cubic } or ${ OPERATIONS.reflect }`
+    ),
+  )(t);
+}
+
+function checkChainOrder(t) {
+  return R.unless(
+    R.anyPass([
+      R.equals(OPERATIONS.quad),
+      R.equals(OPERATIONS.chain),
+    ]),
+    throwError(
+      `<span class="mr1 b">Syntax Error:</span> ${ OPERATIONS.chain } command must follow by ${ OPERATIONS.quad } or ${ OPERATIONS.chain }`
+    ),
+  )(t);
+}
+
+function checkOrder(body) {
+  return R.compose(
+    R.all(R.equals(true)),
+    R.addIndex(R.map)((_, idx, arr) => {
+      const t = R.cond([
+        [R.equals(OPERATIONS.reflect), () => checkReflectOrder(arr[idx - 1])],
+        [R.equals(OPERATIONS.chain),   () => checkChainOrder(arr[idx - 1])],
+        [R.T,                          R.T]
+      ])(_);
+
+      console.log(_, arr[idx - 1], t);
+      return t;
+    }),
+    R.map(R.prop('type')),
+  )(body);
 }
 
 const createArgument = R.compose(
@@ -36,21 +79,6 @@ function pluckTokens(count, tokens) {
   return tokens => tokens.slice(0, count);
 }
 
-function checkArgCount(type, count) {
-  const argType = getArgFor(type);
-  return R.ifElse(
-    R.all(
-      R.propEq('type', argType),
-    ),
-    R.identity,
-    () =>  {
-      throwError(
-        `<span class="mr1 b">Syntax Error:</span> ${ type } command must be followed by ${ count } ${ argType }${ count > 1 ? 'S' : '' }`
-      );
-    },
-  );
-}
-
 function getArgFor(type) {
   return R.ifElse(
     R.any(R.equals(type)),
@@ -59,31 +87,43 @@ function getArgFor(type) {
   )([OPERATIONS.stroke, OPERATIONS.fill]);
 }
 
-function argCountValidation(type, count) {
+function checkArgType(type, count) {
+  const argType = getArgFor(type);
+  return R.when(
+    R.complement(
+      R.all(
+        R.propEq('type', argType),
+      ),
+    ),
+    throwError(
+      `<span class="mr1 b">Syntax Error:</span> ${ type } command must be followed by ${ count } ${ argType }${ count > 1 ? 'S' : '' }`
+    ),
+  );
+}
+
+function validateArgs(type, count) {
   return R.compose(
     operator(R.__, type),
-    checkArgCount(type, count),
+    checkArgType(type, count),
     pluckTokens(count),
   );
 }
 
-function lastOpValidation(type) {
+function validateIsLastOperator(type) {
   return R.ifElse(
     R.isEmpty,
     R.identity,
-    () =>  {
-      throwError(
-        `<span class="mr1 b">Syntax Error:</span> ${ type } must be the last command`
-      );
-    },
+    throwError(
+      `<span class="mr1 b">Syntax Error:</span> ${ type } must be the last command`
+    ),
   );
 }
 
 function opWithValidation(type, { args, prev, last }) {
   return R.compose(
-    argCountValidation(type, args),
+    validateArgs(type, args),
     R.when(
-      R.always(R.equals(last, true)), lastOpValidation(type),
+      R.always(R.equals(last, true)), validateIsLastOperator(type),
     ),
   );
 }
@@ -98,7 +138,9 @@ const operations = {
   [OPERATIONS.horizontal]: opWithValidation(OPERATIONS.horizontal, { args: 1 }),
   [OPERATIONS.vertical]:   opWithValidation(OPERATIONS.vertical, { args: 1 }),
   [OPERATIONS.cubic]:      opWithValidation(OPERATIONS.cubic, { args: 6 }),
+  [OPERATIONS.reflect]:    opWithValidation(OPERATIONS.reflect, { args: 4 }),
   [OPERATIONS.quad]:       opWithValidation(OPERATIONS.quad, { args: 4 }),
+  [OPERATIONS.chain]:      opWithValidation(OPERATIONS.chain, { args: 2 }),
   [OPERATIONS.close]:      opWithValidation(OPERATIONS.close,
                                             { args: 0, last: true }),
 };
