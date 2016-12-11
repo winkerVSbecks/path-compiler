@@ -11,7 +11,8 @@ const operations = {
   [OPERATIONS.move]:        makeMove,
   [OPERATIONS.horizontal]:  makeHorizontal,
   [OPERATIONS.vertical]:    makeVertical,
-  [OPERATIONS.curve]:       makeCurve,
+  [OPERATIONS.cubic]:       makeCubic,
+  [OPERATIONS.quad]:        makeQuad,
   [OPERATIONS.close]:       makeClose,
 };
 
@@ -101,7 +102,12 @@ function makeVertical(svg, y) {
   return addToPath(svg, `V ${y}`);
 }
 
-function makeCurve() {
+function makeCubic(svg, x1, y1, x2, y2, x, y) {
+  return addToPath(svg, `C ${x1} ${y1} ${x2} ${y2} ${x} ${y}`);
+}
+
+function makeQuad(svg, x1, y1, x, y) {
+  return addToPath(svg, `Q ${x1} ${y1} ${x} ${y}`);
 }
 
 function makeClose(svg) {

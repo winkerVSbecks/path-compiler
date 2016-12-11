@@ -23,7 +23,9 @@ size 2
 stroke #ff41b4
 move 103 250
 horizontal 244
-line 200 80.84
+line 300 120.84
+cubic 120 140 100 60 100 110
+quad 50 100 100 250
 close`;
 
 const canvas = document.querySelector('#js-canvas');

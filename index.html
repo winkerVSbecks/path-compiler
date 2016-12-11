@@ -51,7 +51,8 @@
         <tr class="bb b--light-gray">
           <td class="pv3 pr3">canvas</td>
           <td class="pv3 ph3 nowrap">
-            width<code class="silver">: number</code>, height<code class="silver">: number</code>
+            width<code class="silver">: number</code>,<br/>
+            height<code class="silver">: number</code>
           </td>
           <td class="pv3 ph3">sets the artboard dimensions</td>
           <td class="pv3 ph3">400x400</td>
@@ -114,19 +115,47 @@
           <td class="pv3 ph3"></td>
         </tr>
         <tr class="bb b--light-gray">
-          <td class="pv3 pr3">curve</td>
+          <td class="pv3 pr3">cubic</td>
           <td class="pv3 ph3 nowrap">
-            stroke-width<code class="silver">: number</code>
+            x1<code class="silver">: number</code>,
+            y1<code class="silver">: number</code>,<br/>
+            x2<code class="silver">: number</code>,
+            y2<code class="silver">: number</code>,<br/>
+            x<code class="silver">: number</code>,
+            y<code class="silver">: number</code>
           </td>
-          <td class="pv3 ph3">sets the stroke size</td>
+          <td class="pv3 ph3">draws a cubic bezier curve with two control points</td>
           <td class="pv3 ph3"></td>
         </tr>
         <tr class="bb b--light-gray">
           <td class="pv3 pr3">reflect</td>
           <td class="pv3 ph3 nowrap">
-            stroke-width<code class="silver">: number</code>
+            x2<code class="silver">: number</code>,
+            y2<code class="silver">: number</code>,<br/>
+            x<code class="silver">: number</code>,
+            y<code class="silver">: number</code>
           </td>
-          <td class="pv3 ph3">sets the stroke size</td>
+          <td class="pv3 ph3">draws a cubic curve where first control point is a reflection of the previous curve's second control point</td>
+          <td class="pv3 ph3"></td>
+        </tr>
+        <tr class="bb b--light-gray">
+          <td class="pv3 pr3">quad</td>
+          <td class="pv3 ph3 nowrap">
+            x1<code class="silver">: number</code>,
+            y1<code class="silver">: number</code>,<br/>
+            x<code class="silver">: number</code>,
+            y<code class="silver">: number</code>
+          </td>
+          <td class="pv3 ph3">draws a quadratic bezier curve with one control point</td>
+          <td class="pv3 ph3"></td>
+        </tr>
+        <tr class="bb b--light-gray">
+          <td class="pv3 pr3">chain</td>
+          <td class="pv3 ph3 nowrap">
+            x<code class="silver">: number</code>,
+            y<code class="silver">: number</code>
+          </td>
+          <td class="pv3 ph3">draws a quadratic bezier curve where the control point is inferred from control point of the previous curve.</td>
           <td class="pv3 ph3"></td>
         </tr>
         <tr class="bb b--light-gray">

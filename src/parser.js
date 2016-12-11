@@ -97,7 +97,8 @@ const operations = {
   [OPERATIONS.move]:       opWithValidation(OPERATIONS.move, { args: 2 }),
   [OPERATIONS.horizontal]: opWithValidation(OPERATIONS.horizontal, { args: 1 }),
   [OPERATIONS.vertical]:   opWithValidation(OPERATIONS.vertical, { args: 1 }),
-  [OPERATIONS.curve]:      opWithValidation(OPERATIONS.curve, { args: 6 }),
+  [OPERATIONS.cubic]:      opWithValidation(OPERATIONS.cubic, { args: 6 }),
+  [OPERATIONS.quad]:       opWithValidation(OPERATIONS.quad, { args: 4 }),
   [OPERATIONS.close]:      opWithValidation(OPERATIONS.close,
                                             { args: 0, last: true }),
 };
