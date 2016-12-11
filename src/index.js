@@ -9,14 +9,14 @@ const codePlaceholder = `canvas 400 300
 size 2
 stroke #ff41b4
 move 103 250
-horizontal 244
-line 300 120.84
-cubic 120 140 100 60 100 110
-reflect 100 60 100 110
-reflect 100 60 100 110
-quad 50 100 100 250
-chain 100 250
-chain 100 250
+horizontal 244.84
+line 320 120
+cubic 340 80 260 80 280 120
+reflect 220 160 240 120
+reflect 220 100 200 120
+quad 180 140 160 120
+chain 120 120
+chain 80 120
 close`;
 
 const canvas = document.querySelector('#js-canvas');
@@ -34,7 +34,6 @@ function render(svg) {
 }
 
 const execute = R.compose(
-  // clearError,
   render,
   generator,
   R.tap(console.log),
@@ -43,6 +42,7 @@ const execute = R.compose(
   parser,
   R.tap(console.table),
   lexer,
+  R.tap(clearError),
 );
 
 document.querySelector('#js-code').innerText = codePlaceholder;

@@ -113,15 +113,15 @@ function makeQuad(svg, x1, y1, x, y) {
 }
 
 function makeClose(svg) {
-  return addToPath(svg, `Z`);
+  return addToPath(svg, 'Z');
 }
 
-function makeReflect(svg) {
-  return svg;
+function makeReflect(svg, x2, y2, x, y) {
+  return addToPath(svg, `S ${x2} ${y2} ${x} ${y}`);
 }
 
-function makeChain(svg) {
-  return svg;
+function makeChain(svg, x, y) {
+  return addToPath(svg, `T ${x} ${y}`);
 }
 
 function addToPath(svg, command) {

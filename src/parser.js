@@ -48,14 +48,11 @@ function checkOrder(body) {
   return R.compose(
     R.all(R.equals(true)),
     R.addIndex(R.map)((_, idx, arr) => {
-      const t = R.cond([
+      return R.cond([
         [R.equals(OPERATIONS.reflect), () => checkReflectOrder(arr[idx - 1])],
         [R.equals(OPERATIONS.chain),   () => checkChainOrder(arr[idx - 1])],
         [R.T,                          R.T]
       ])(_);
-
-      console.log(_, arr[idx - 1], t);
-      return t;
     }),
     R.map(R.prop('type')),
   )(body);
