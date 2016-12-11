@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --content-base ./ --hot"
+    "build": "webpack --content-base ./",
+    "dev": "webpack-dev-server --content-base ./ --hot",
+    "start": "list ."
   },
   "keywords": [],
   "author": "",
@@ -19,6 +21,7 @@
     "babel-core": "^6.18.2",
     "babel-loader": "^6.2.7",
     "babel-preset-es2015": "^6.18.0",
+    "list": "^0.9.5",
     "webpack": "^1.13.3",
     "webpack-dev-server": "^1.16.2"
   }

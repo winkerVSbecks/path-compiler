@@ -9,7 +9,6 @@ export function throwError(msg) {
 }
 
 export function clearError() {
-  console.log('CLEAR ERROR!');
   errorBox.classList.remove('bg-washed-red', 'red');
   errorBox.classList.add('bg-light-gray');
   errorBox.innerHTML = '';

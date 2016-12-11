@@ -42,6 +42,7 @@ const execute = R.compose(
   parser,
   R.tap(console.table),
   lexer,
+  R.tap(clearCanvas),
   R.tap(clearError),
 );
 
@@ -52,3 +53,8 @@ compileButton.addEventListener('click', () => {
   console.clear();
   execute(code.value);
 }, false);
+
+function clearCanvas() {
+  const svg = canvas.querySelector('svg');
+  if (svg) { svg.innerHTML = ''; }
+}
